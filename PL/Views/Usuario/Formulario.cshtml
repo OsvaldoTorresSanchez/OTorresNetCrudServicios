@@ -1,0 +1,61 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/StyleUsuario.css">
+<script src="./script.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+<script src="https://use.fontawesome.com/6a4ab084c1.js"></script>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2></h2>
+        </div>
+    </div>
+
+    <div class="testbox">
+        <h1>Formulario</h1>
+
+        @using (Html.BeginForm("Formulario", "usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <hr>
+            <div class="accounttype">
+                <input type="radio" value="None" id="radioOne" name="account" checked />
+                <label for="radioOne" class="radio" chec>Agregra</label>
+                <input type="radio" value="None" id="radioTwo" name="account" />
+                <label for="radioTwo" class="radio">Actualizar</label>
+            </div>
+            <hr>
+
+            <label id="icon" for="name"><i class="bi bi-file-person" aria-hidden="true"></i></label>
+            @*<input type="text" name="name" id="name" placeholder="Organisation" required />*@
+            @Html.TextBoxFor(model => model.Nombre, new { id = "name", name = "name", placeholder = "Organisation", required =true})
+
+            <label id="icon" for="name"><i class="bi bi-file-person"></i></label>
+            @Html.TextBoxFor(model => model.Paterno, new { id = "name", name = "name", placeholder = "Organisation", required =true})
+            @*<input type="text" name="name" id="name" placeholder="Email" required />*@
+
+            <label id="icon" for="name"><i class="bi bi-file-person"></i></label>
+            @Html.TextBoxFor(model => model.Materno, new { id = "name", name = "name", placeholder = "Organisation", required =true})
+            @*<input type="text" name="name" id="name" placeholder="Name" required />*@
+
+            <label id="icon" for="name"><i class="bi bi-envelope"></i></label>
+            @Html.TextBoxFor(model => model.Correo, new { id = "name", name = "name", placeholder = "Organisation", required =true})
+            @*<input type="text" name="name" id="name" placeholder="Telephone Number" required />*@
+
+            <label id="icon" for="name"><i class="icon-user"></i></label>
+            @Html.TextBoxFor(model => model.Edad, new { id = "name", name = "name", placeholder = "Organisation", required =true})
+            @*<input type="password" name="name" id="name" placeholder="Password" required />*@
+
+            <a href="#" class="button">Register</a>
+
+        }
+    </div>
+
+
+</div>
