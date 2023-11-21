@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ML;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +59,7 @@ namespace BL
         }
 
 
-        public static ML.Result GetById (int id)
+        public static ML.Result GetById(int id)
         {
             ML.Result result = new ML.Result();
 
@@ -71,7 +73,7 @@ namespace BL
 
                     if (query != null)
                     {
-                        ML.Usuario usuario = new ML.Usuario();  
+                        ML.Usuario usuario = new ML.Usuario();
                         usuario.IdUsuario = query.IdUsuario;
                         usuario.Nombre = query.Nombre;
                         usuario.Paterno = query.APPaterno;
@@ -100,7 +102,102 @@ namespace BL
             }
             return result;
         }
-        
+
+        public static ML.Result Add(ML.Usuario usuario)
+        {
+            ML.Result result = new ML.Result(); try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+
+                    var query = context.UsuarioAdd(usuario.Nombre, usuario.Paterno, usuario.Materno, usuario.Correo, usuario.Edad);
+
+                    if (query > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se puede agregar el registro de " + usuario.Nombre;
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                result.Correct = false;
+                result.ErrorMessage = e.Message;
+                result.ex = e;
+            }
+
+            return result;
+        }
+
+        public static ML.Result Update(ML.Usuario usuario)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var query = context.UsuarioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.Paterno, usuario.Materno,
+                        usuario.Correo, usuario.Edad);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se actualizo el registro " + usuario.Nombre;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = e.Message;
+                result.ex = e;
+            }
+
+            return result;
+        }
+
+        public static ML.Result Delete(int Id)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var query = context.UsuarioDelete(Id);
+
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se elimino el regitros";
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = e.Message;
+                result.ex = e;
+            }
+
+            return result;
+        }
 
     }
 }

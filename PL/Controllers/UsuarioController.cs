@@ -40,14 +40,14 @@ namespace PL.Controllers
 
 
         [HttpGet]
-        public ActionResult Formulario(int IdUsuario)
+        public ActionResult Formulario(int? IdUsuario)
         {
             ML.Usuario usuario = new ML.Usuario();
             usuario.Usuarios = new List<object>();
 
             if (IdUsuario > 0)
             {
-                ML.Result result = BL.Usuairo.GetById(IdUsuario);
+                ML.Result result = BL.Usuairo.GetById((int)IdUsuario);
 
                 if (result.Correct)
                 {
@@ -63,9 +63,40 @@ namespace PL.Controllers
         }
 
         [HttpPost]
-        public ActionResult Formulario(ML.Usuario usuraio)
+        public ActionResult Formulario(ML.Usuario usuario)
         {
-            return View();
+            if(usuario.IdUsuario == 0)
+            {
+                ML.Result result = BL.Usuairo.Add(usuario);
+                if(result.Correct)
+                {
+                    ViewBag.Message = "Se ingreso corectamente el usuario "+ usuario.Nombre;
+
+                }
+                else
+                {
+                    ViewBag.Message = "No se ingreso correctamente el usuario" + usuario.Nombre;
+                    
+                }
+            }
+            else
+            {
+                ML.Result result = BL.Usuairo.Update(usuario);
+
+                if(result.Correct)
+                {
+                    ViewBag.Message = "Se actualizo correctamente " + usuario.Nombre;
+
+                }
+                else
+                {
+                    ViewBag.Message = "No se  actualizo correctamente " +  usuario.Nombre;
+
+                }
+
+
+            }
+            return PartialView("Modal");
         }
 
 
