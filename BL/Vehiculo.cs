@@ -76,7 +76,7 @@ namespace BL
                     else
                     {
                         result.Correct = false;
-                        result.ErrorMessage = "No se puede añadir la direccion " + vehiculo.NumeroReclamo;
+                        result.ErrorMessage = "No se puede añadir el registro " + vehiculo.NumeroReclamo;
                     }
                 }
             }
