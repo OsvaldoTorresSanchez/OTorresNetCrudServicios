@@ -28,6 +28,7 @@ namespace DL
         }
     
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Vehiculo> Vehiculoes { get; set; }
     
         public virtual int UsuarioAdd(string nombre, string aPPATERNO, string aPMaterno, string correo, Nullable<int> edad)
         {
@@ -104,6 +105,60 @@ namespace DL
                 new ObjectParameter("Edad", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioUpdate", idUsuarioParameter, nombreParameter, aPPATERNOParameter, aPMATERNOParameter, correoParameter, edadParameter);
+        }
+    
+        public virtual int VehiculoAdd(string fechaReclamo, Nullable<int> horaPercanse, string tipoPercanse, Nullable<int> numeroPoliza, string nombreConductor, Nullable<int> contactoConductor, string detallesVehiculo, string dañosPrejuicios, Nullable<decimal> estimacionReparacion, Nullable<bool> estatus, byte[] imagen)
+        {
+            var fechaReclamoParameter = fechaReclamo != null ?
+                new ObjectParameter("FechaReclamo", fechaReclamo) :
+                new ObjectParameter("FechaReclamo", typeof(string));
+    
+            var horaPercanseParameter = horaPercanse.HasValue ?
+                new ObjectParameter("HoraPercanse", horaPercanse) :
+                new ObjectParameter("HoraPercanse", typeof(int));
+    
+            var tipoPercanseParameter = tipoPercanse != null ?
+                new ObjectParameter("TipoPercanse", tipoPercanse) :
+                new ObjectParameter("TipoPercanse", typeof(string));
+    
+            var numeroPolizaParameter = numeroPoliza.HasValue ?
+                new ObjectParameter("NumeroPoliza", numeroPoliza) :
+                new ObjectParameter("NumeroPoliza", typeof(int));
+    
+            var nombreConductorParameter = nombreConductor != null ?
+                new ObjectParameter("NombreConductor", nombreConductor) :
+                new ObjectParameter("NombreConductor", typeof(string));
+    
+            var contactoConductorParameter = contactoConductor.HasValue ?
+                new ObjectParameter("ContactoConductor", contactoConductor) :
+                new ObjectParameter("ContactoConductor", typeof(int));
+    
+            var detallesVehiculoParameter = detallesVehiculo != null ?
+                new ObjectParameter("DetallesVehiculo", detallesVehiculo) :
+                new ObjectParameter("DetallesVehiculo", typeof(string));
+    
+            var dañosPrejuiciosParameter = dañosPrejuicios != null ?
+                new ObjectParameter("DañosPrejuicios", dañosPrejuicios) :
+                new ObjectParameter("DañosPrejuicios", typeof(string));
+    
+            var estimacionReparacionParameter = estimacionReparacion.HasValue ?
+                new ObjectParameter("EstimacionReparacion", estimacionReparacion) :
+                new ObjectParameter("EstimacionReparacion", typeof(decimal));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("VehiculoAdd", fechaReclamoParameter, horaPercanseParameter, tipoPercanseParameter, numeroPolizaParameter, nombreConductorParameter, contactoConductorParameter, detallesVehiculoParameter, dañosPrejuiciosParameter, estimacionReparacionParameter, estatusParameter, imagenParameter);
+        }
+    
+        public virtual ObjectResult<VehiculoGetAll_Result> VehiculoGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VehiculoGetAll_Result>("VehiculoGetAll");
         }
     }
 }

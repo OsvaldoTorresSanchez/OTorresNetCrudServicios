@@ -14,5 +14,18 @@ namespace WCF
         [OperationContract]
         [ServiceKnownType(typeof(ML.Usuario))]
         WCF.Result GetAll();
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ML.Usuario))]
+        WCF.Result GetById(int IdAlumno);
+
+        [OperationContract]
+        WCF.Result Add(ML.Usuario usuario);
+
+        [OperationContract]
+        WCF.Result Update(ML.Usuario usuario);
+
+        [OperationContract]
+        WCF.Result Delete(ML.Usuario usuario);
     }
 }

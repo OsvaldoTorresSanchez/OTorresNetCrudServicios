@@ -23,6 +23,45 @@ namespace PL.ServiceUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/GetAll", ReplyAction="http://tempuri.org/IUsuario/GetAllResponse")]
         System.Threading.Tasks.Task<WCF.Result> GetAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/GetById", ReplyAction="http://tempuri.org/IUsuario/GetByIdResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Usuario))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Exception))]
+        WCF.Result GetById(int IdAlumno);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/GetById", ReplyAction="http://tempuri.org/IUsuario/GetByIdResponse")]
+        System.Threading.Tasks.Task<WCF.Result> GetByIdAsync(int IdAlumno);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/Add", ReplyAction="http://tempuri.org/IUsuario/AddResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Exception))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WCF.Result))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Usuario))]
+        WCF.Result Add(ML.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/Add", ReplyAction="http://tempuri.org/IUsuario/AddResponse")]
+        System.Threading.Tasks.Task<WCF.Result> AddAsync(ML.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/Update", ReplyAction="http://tempuri.org/IUsuario/UpdateResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Exception))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WCF.Result))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Usuario))]
+        WCF.Result Update(ML.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/Update", ReplyAction="http://tempuri.org/IUsuario/UpdateResponse")]
+        System.Threading.Tasks.Task<WCF.Result> UpdateAsync(ML.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/Delete", ReplyAction="http://tempuri.org/IUsuario/DeleteResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Exception))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WCF.Result))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Usuario))]
+        WCF.Result Delete(ML.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuario/Delete", ReplyAction="http://tempuri.org/IUsuario/DeleteResponse")]
+        System.Threading.Tasks.Task<WCF.Result> DeleteAsync(ML.Usuario usuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -58,6 +97,38 @@ namespace PL.ServiceUsuario {
         
         public System.Threading.Tasks.Task<WCF.Result> GetAllAsync() {
             return base.Channel.GetAllAsync();
+        }
+        
+        public WCF.Result GetById(int IdAlumno) {
+            return base.Channel.GetById(IdAlumno);
+        }
+        
+        public System.Threading.Tasks.Task<WCF.Result> GetByIdAsync(int IdAlumno) {
+            return base.Channel.GetByIdAsync(IdAlumno);
+        }
+        
+        public WCF.Result Add(ML.Usuario usuario) {
+            return base.Channel.Add(usuario);
+        }
+        
+        public System.Threading.Tasks.Task<WCF.Result> AddAsync(ML.Usuario usuario) {
+            return base.Channel.AddAsync(usuario);
+        }
+        
+        public WCF.Result Update(ML.Usuario usuario) {
+            return base.Channel.Update(usuario);
+        }
+        
+        public System.Threading.Tasks.Task<WCF.Result> UpdateAsync(ML.Usuario usuario) {
+            return base.Channel.UpdateAsync(usuario);
+        }
+        
+        public WCF.Result Delete(ML.Usuario usuario) {
+            return base.Channel.Delete(usuario);
+        }
+        
+        public System.Threading.Tasks.Task<WCF.Result> DeleteAsync(ML.Usuario usuario) {
+            return base.Channel.DeleteAsync(usuario);
         }
     }
 }

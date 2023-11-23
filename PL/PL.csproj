@@ -191,7 +191,10 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioAPIController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioWCFController.cs" />
+    <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,15 +225,18 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\StyleUsuario.css" />
+    <Content Include="Content\StyleVehiculo.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\userl.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Properties\DataSources\WCF.Result.datasource" />
     <None Include="Connected Services\ServiceUsuario\Usuario.wsdl" />
     <None Include="Connected Services\ServiceUsuario\Usuario.xsd">
       <SubType>Designer</SubType>
@@ -250,7 +256,6 @@
     <None Include="Connected Services\ServiceUsuario\Usuario5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Properties\DataSources\WCF.Result.datasource" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -280,9 +285,20 @@
     <Content Include="Views\Usuario\GetAll.cshtml" />
     <Content Include="Views\Usuario\Formulario.cshtml" />
     <Content Include="Views\Usuario\Modal.cshtml" />
+    <Content Include="Views\UsuarioAPI\GetAllAPI.cshtml" />
+    <Content Include="Views\UsuarioAPI\FormularioAPI.cshtml" />
+    <Content Include="Views\UsuarioAPI\Modal.cshtml" />
+    <Content Include="Views\UsuarioWCF\GetAllWCF.cshtml" />
+    <Content Include="Views\UsuarioWCF\Modal.cshtml" />
+    <Content Include="Views\UsuarioWCF\FormularioWCF.cshtml" />
+    <Content Include="Views\Vehiculo\GetAll.cshtml" />
+    <Content Include="Views\Vehiculo\CargaArchivo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\ArchivosTxt\" />
+    <Folder Include="Files\Excel\" />
+    <Folder Include="Files\Txt\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

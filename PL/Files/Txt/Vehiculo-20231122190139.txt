@@ -1,0 +1,3 @@
+FechaReclamo|HoraPercanse|TipoPercanse|NumeroPoliza|NombreConductor|ContactoConductor|DetallesVehiculo|DañosPrejuicios|EstimacionReparacion|Estatus|Imagen|
+31/08/2022|1545|Colisión lateral|456789|María Rodríguez|5559876|Vehículo verde, impacto en el lado derecho|Daños en la puerta y la llanta|800.00|1||
+01/09/2019|1130|Accidente de motocicleta|345678|Pedro López|5555432|Motocicleta, caída en una curva|Lesiones personales y daños en la motocicleta|1500.00|0||	

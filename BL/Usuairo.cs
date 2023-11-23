@@ -105,7 +105,8 @@ namespace BL
 
         public static ML.Result Add(ML.Usuario usuario)
         {
-            ML.Result result = new ML.Result(); try
+            ML.Result result = new ML.Result(); 
+            try
             {
                 using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
                 {

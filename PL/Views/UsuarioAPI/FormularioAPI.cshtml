@@ -1,0 +1,102 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "FormularioAPI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/StyleUsuario.css">
+<script src="./script.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+<script src="https://use.fontawesome.com/6a4ab084c1.js"></script>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2></h2>
+        </div>
+    </div>
+
+    <div class="testbox">
+        <h1>Formulario</h1>
+
+        @using (Html.BeginForm("FormularioAPI", "UsuarioAPI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <hr>
+            <div class="accounttype">
+
+
+                @*<input type="radio" value="None" id="radioOne" name="account" checked />
+                    <label for="radioOne" class="radio" chec>Agregar</label>
+
+                    <input type="radio" value="None" id="radioTwo" name="account" />
+                    <label for="radioTwo" class="radio">Actualizar</label>*@
+
+                @*@Html.RadioButtonFor(model => model.IdUsuario, true, new { id = "radioOne", @class = "visually-hidden-focusable" })
+                    @Html.LabelFor(model => model.IdUsuario, "Agregar", new { @class = "radio", @for = "radioOne" })
+
+                    @Html.RadioButtonFor(model => model.IdUsuario, false, new { id = "radioTwo", @class = "visually-hidden-focusable" })
+                    @Html.LabelFor(model => model.IdUsuario, "Actualizar", new { @class = "radio", @for = "radioTwo" })*@
+
+                @if (Model.IdUsuario == 0)
+                {
+                    @Html.RadioButtonFor(model => model.IdUsuario, true, new { id = "radioOne", @class = "visually-hidden-focusable", @checked = "checked" })
+                    @Html.LabelFor(model => model.IdUsuario, "Registrar ", new { @class = "radio", @for = "radioOne" })
+
+                    @Html.RadioButtonFor(model => model.IdUsuario, false, new { id = "radioTwo", @class = "visually-hidden-focusable", @disabled = (Model.IdUsuario != 1) })
+                    @Html.LabelFor(model => model.IdUsuario, "Actualizar", new { @class = "radio", @for = "radioTwo" })
+                }
+                else if (Model.IdUsuario != null)
+                {
+                    @Html.RadioButtonFor(model => model.IdUsuario, false, new { id = "radioOne", @class = "visually-hidden-focusable", @disabled = (Model.IdUsuario != 1) })
+                    @Html.LabelFor(model => model.IdUsuario, "Agregar", new { @class = "radio", @for = "radioOne" })
+
+                    @Html.RadioButtonFor(model => model.IdUsuario, Model.IdUsuario, new { id = "radioTwo", @class = "visually-hidden-focusable", @checked = "checked" })
+                    @Html.LabelFor(model => model.IdUsuario, "Actualizar", new { @class = "radio", @for = "radioTwo" })
+
+                }
+
+            </div>
+            <hr>
+
+
+            @*@Html.LabelFor(model => model.IdUsuario, new { @class = "form-control " })
+                @Html.TextBoxFor(model => model.IdUsuario, new { @class = "form-control", @id = "txtIdUsuario" })*@
+
+            <label id="icon" for="name"><i class="bi bi-file-person" aria-hidden="true"></i></label>
+            @*<input type="text" name="name" id="name" placeholder="Organisation" required />*@
+            @Html.TextBoxFor(model => model.Nombre, new { id = "Nombre", name = "name", placeholder = "Nombre", required = true })
+
+            <label id="icon" for="name"><i class="bi bi-file-person"></i></label>
+            @Html.TextBoxFor(model => model.Paterno, new { id = "name", name = "name", placeholder = "Apellido Paterno", required = true })
+            @*<input type="text" name="name" id="name" placeholder="Email" required />*@
+
+            <label id="icon" for="name"><i class="bi bi-file-person"></i></label>
+            @Html.TextBoxFor(model => model.Materno, new { id = "name", name = "name", placeholder = "Apellido Materno", required = true })
+            @*<input type="text" name="name" id="name" placeholder="Name" required />*@
+
+            <label id="icon" for="name"><i class="bi bi-envelope"></i></label>
+            @Html.TextBoxFor(model => model.Correo, new { id = "name", name = "name", placeholder = "Correo", required = true })
+            @*<input type="text" name="name" id="name" placeholder="Telephone Number" required />*@
+
+            <label id="icon" for="name"><i class="icon-user"></i></label>
+            @Html.TextBoxFor(model => model.Edad, new { id = "name", name = "name", required = true })
+            @*<input type="password" name="name" id="name" placeholder="Password" required />*@
+
+            @Html.ActionLink("Regresar", "GetAllAPI", "UsuarioAPI", new { @class = "button" })
+            @*<a href="#" type="submit" class="button"> Regresar</a>*@
+
+            <button type="submit" class="buttonss"> Agregar</button>
+        }
+    </div>
+
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+
+
+
+</script>

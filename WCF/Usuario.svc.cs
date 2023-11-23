@@ -25,5 +25,62 @@ namespace WCF
 
             return resultSL;
         }
+
+        public WCF.Result GetById(int usuario)
+        {
+            ML.Result result = BL.Usuairo.GetById(usuario);
+
+            WCF.Result resultSL = new WCF.Result();
+            resultSL.Correct = result.Correct;
+            resultSL.ErrorMessage = result.ErrorMessage;
+            resultSL.ex = result.ex;
+            resultSL.Object = result.Object;
+            resultSL.Objects = result.Objects;
+
+            return resultSL;
+        }
+
+        public WCF.Result Add(ML.Usuario usuario)
+        {
+            ML.Result result = BL.Usuairo.Add(usuario);
+
+            WCF.Result resultSL = new WCF.Result();
+            resultSL.Correct = result.Correct;
+            resultSL.ErrorMessage = result.ErrorMessage;
+            resultSL.ex = result.ex;
+            resultSL.Object = result.Object;
+            resultSL.Objects = result.Objects;
+
+            return resultSL;
+        }
+
+        public WCF.Result Update(ML.Usuario usuario)
+        {
+            ML.Result result = BL.Usuairo.Update(usuario);
+
+            WCF.Result resultSL = new WCF.Result();
+            resultSL.Correct = result.Correct;
+            resultSL.ErrorMessage = result.ErrorMessage;
+            resultSL.ex = result.ex;
+            resultSL.Object = result.Object;
+            resultSL.Objects = result.Objects;
+
+            return resultSL;
+        }
+
+        public WCF.Result Delete(ML.Usuario usuario)
+        {
+            ML.Result result = BL.Usuairo.Delete(usuario.IdUsuario);
+
+            WCF.Result resultSL = new WCF.Result();
+            resultSL.Correct = result.Correct;
+            resultSL.ErrorMessage = result.ErrorMessage;
+            resultSL.ex = result.ex;
+            resultSL.Object = result.Object;
+            resultSL.Objects = result.Objects;
+
+            return resultSL;
+        }
+
     }
 }

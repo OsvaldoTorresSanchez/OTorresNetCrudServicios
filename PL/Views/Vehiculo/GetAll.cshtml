@@ -1,0 +1,126 @@
+﻿@model ML.Vehiculo
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="~/Content/StyleVehiculo.css">
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12 ">
+
+            @Html.ActionLink(" Carga masiva ", "CargaArchivo", "Vehiculo", new { @class = "btn btn-primary bi bi-database-fill-up" })
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md- offset-11 ">
+
+            @Html.ActionLink(" ", "Formulario", "Usuario", new { @class = "btn btn-success bi bi-person-plus-fill" })
+
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Vehiculos != null)
+    {
+        <div class="row">
+            <div class="col-md-11">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Editar</th>
+                                <th class="d-none d-md-table-cell">Numero reclamo</th>
+                                <th class="d-none d-md-table-cell">Fecha Reclamo</th>
+                                <th class="d-none d-md-table-cell">Hora Percanse</th>
+                                <th class="d-none d-md-table-cell">Tipo Percanse </th>
+                                <th class="d-none d-md-table-cell">Numero Poliza</th>
+                                <th class="d-none d-md-table-cell">Nombre Conductor</th>
+                                <th class="d-none d-md-table-cell">Contacto Conductor</th>
+                                <th class="d-none d-md-table-cell">Detalles Vehiculo</th>
+                                <th class="d-none d-md-table-cell">Daños Prejuicios</th>
+                                <th class="d-none d-md-table-cell">Estimacion Reparacion</th>
+                                <th class="d-none d-md-table-cell">Statu</th>
+                                <th class="d-none d-md-table-cell">Imagen</th>
+                                <th>Eliminar</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            @foreach (ML.Vehiculo vehiculo in Model.Vehiculos)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <a class="btn btn-warning glyphicon glyphicon-edit bi bi-pencil-square"
+                                           href="@Url.Action("Formulario", "Vehiculo", new { NumeroPoliza = vehiculo.NumeroReclamo })">
+
+                                        </a>
+                                    </td>
+                                    <td>@vehiculo.NumeroReclamo</td>
+                                    <td>@vehiculo.FechaReclamo</td>
+                                    <td>@vehiculo.HoraPercanse</td>
+                                    <td>@vehiculo.TipoPercanse</td>
+                                    <td>@vehiculo.NumeroPoliza</td>
+                                    <td>@vehiculo.NombreConductor</td>
+                                    <td>@vehiculo.ContactoConductor</td>
+                                    <td>@vehiculo.DetallesVehiculo</td>
+                                    <td>@vehiculo.DañosPrejuicios</td>
+                                    <td>@vehiculo.EstimacionReparacion</td>
+                                    <td>
+                                        <label class="switch">
+                                            @if (vehiculo.Statu)
+                                            {
+                                                <input class="chkStatu" value="@vehiculo.NumeroPoliza" type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            }
+                                            else
+                                            {
+                                                <input class="chkStatu" value="@vehiculo.NumeroPoliza" type="checkbox">
+                                                <span class="slider round"></span>
+                                            }
+                                        </label>
+                                    </td>
+                                    @if (vehiculo.Imagen != null)
+                                    {
+                                        <td>
+                                            <img src="data:image/jpg;base64,@Convert.ToBase64String(vehiculo.Imagen)" alt="@vehiculo.NumeroPoliza" style="width: 125px; height: 100px;" />
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <img src="~/Img/userl.jpg" alt="@vehiculo.NumeroPoliza" style="width: 125px; height: 100px;" />
+                                        </td>
+                                    }
+                                    <td>
+                                        <a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Vehiculo", new {NumeroPoliza = vehiculo.NumeroPoliza })"
+                                           onclick="return confirm('Estas seguro de elimidar el registro?');">
+
+                                        </a>
+                                    </td>
+                                </tr>
+
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+    }
+
+
+</div>
+
+
