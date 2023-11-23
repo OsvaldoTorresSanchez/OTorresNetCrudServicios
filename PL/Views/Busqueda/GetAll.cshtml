@@ -1,0 +1,167 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registros de los usuarios</h2>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <button type="button" id="btn-1" onclick="mostrarBoton1()" class="btn btn-info bi bi-search"> Busqueda</button>
+        </div>
+    </div>
+    <br />
+
+    @using (Html.BeginForm("GetAll", "Busqueda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-11">
+                <button type="submit" class="btn btn-info bi bi-search " id="btnCargar" style="display: none"> </button>
+
+
+                @Html.LabelFor(model => model.Nombre, new { @id = "lbNombre", @style = "display: none;" })
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control small-textbox", placeholder = " Nombre", @id = "txtNombre", @style = "display: none;" })
+
+                @Html.LabelFor(model => model.Paterno, new { @id = "lbApellidoPaterno", @style = "display: none;" })
+                @Html.TextBoxFor(model => model.Paterno, new { @class = "form-control small-textbox", placeholder = " Apellido Paterno", @id = "txtApellidoPaterno", @style = "display: none;" })
+
+                @Html.LabelFor(model => model.Materno, new { @id = "lbApellidoMaterno", @style = "display: none;" })
+                @Html.TextBoxFor(model => model.Materno, new { @class = "form-control small-textbox", placeholder = " Apellido Materno", @id = "txtApellidoMaterno", @style = "display: none;" })
+
+                @Html.LabelFor(model => model.Edad, new { @id = "lbEdad", @style = "display: none;" })
+                @Html.TextBoxFor(model => model.Edad, new { @class = "form-control small-textboxEdad", placeholder = " Apellido Materno", @id = "txtEdad", @style = "display: none;" })
+
+
+
+            </div>
+        </div>
+        <br />
+
+    }
+
+
+    @if (Model.Usuarios != null)
+    {
+
+
+
+        <div class="row">
+
+            <div class="col-md-11">
+
+                <div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Editar</th>
+                                <th class="visually-hidden-focusable">Id</th>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Correo</th>
+                                <th>Edad</th>
+                                <th>Eliminar</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            @foreach (ML.Usuario usuario in Model.Usuarios)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <a class="btn btn-warning glyphicon glyphicon-edit bi bi-pencil-square"
+                                           href="@Url.Action("Formulario", "Usuario", new { IdUsuario = usuario.IdUsuario })">
+
+                                        </a>
+                                    </td>
+                                    <td class="visually-hidden-focusable">@usuario.IdUsuario</td>
+                                    <td>@usuario.Nombre</td>
+                                    <td>@usuario.Paterno</td>
+                                    <td>@usuario.Materno</td>
+                                    <td>@usuario.Correo</td>
+                                    <td>@usuario.Edad</td>
+                                    <td>
+                                        <a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Usuario", new {IdUsuario = usuario.IdUsuario })"
+                                           onclick="return confirm('Estas seguro de elimidar el registro?');">
+
+                                        </a>
+                                    </td>
+                                </tr>
+
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+    }
+
+
+</div>
+
+
+<script type="text/javascript">
+    var txt_1 = document.getElementById('txtNombre');
+    var lb_1 = document.getElementById('lbNombre');
+    //var lbl_1 = document.getElementById('lblNombre');
+
+    var txt_2 = document.getElementById('txtApellidoPaterno');
+    var lb_2 = document.getElementById('lbApellidoPaterno');
+    // var lbl_2 = document.getElementById('lblApellidoPaterno');
+
+    var txt_3 = document.getElementById('txtApellidoMaterno');
+    var lb_3 = document.getElementById('lbApellidoMaterno');
+    // var lbl_3 = document.getElementById('lblApellidoMaterno');
+
+    var txt_4 = document.getElementById('txtEdad');
+    var lb_4 = document.getElementById('lbEdad');
+
+    var btn_1 = document.getElementById('btn-1');
+    var btn_2 = document.getElementById('btnCargar');
+
+    function mostrarBoton1() {
+        txt_1.style.display = 'inline';
+        lb_1.style.display = 'inline';
+        //     lbl_1.style.display = 'inline';
+        btn_2.style.display = 'inline';
+
+        txt_2.style.display = 'inline';
+        lb_2.style.display = 'inline';
+        //       lbl_2.style.display = 'inline';
+
+        txt_3.style.display = 'inline';
+        lb_3.style.display = 'inline';
+        //    lbl_3.style.display = 'inline';
+
+        txt_4.style.display = 'inline';
+        lb_4.style.display = 'inline';
+    }
+</script>
+
+
+<style>
+    .small-textbox {
+        width: 170px;
+        height: 30px;
+    }
+    .small-textboxEdad {
+        width: 50px;
+        height: 30px;
+    }
+</style>

@@ -84,6 +84,7 @@ namespace BL
             {
                 result.Correct = false;
                 result.ErrorMessage = ex.Message;
+                result.ErrorMessage = ex.InnerException.Message;//Error mas detallado 
                 result.ex = ex;
             }
 

@@ -200,5 +200,63 @@ namespace BL
             return result;
         }
 
+
+
+        ///
+
+        public static ML.Result GetAllEFView(ML.Usuario usuarioBusqueda)
+        {
+            ML.Result result = new ML.Result();
+            //empleadoBusqueda.Nombre= (empleadoBusqueda.Nombre == null) ? "" : empleadoBusqueda.Nombre;
+            //empleadoBusqueda.ApellidoPaterno = (empleadoBusqueda.ApellidoPaterno == null) ? "" : empleadoBusqueda.ApellidoPaterno;
+            //empleadoBusqueda.ApellidoMaterno = (empleadoBusqueda.ApellidoMaterno == null) ? "" : empleadoBusqueda.ApellidoMaterno;
+            //empleadoBusqueda.Empresa.IdEmpresa = (empleadoBusqueda.Empresa.IdEmpresa != 0) ? int.Parse("0") : empleadoBusqueda.Empresa.IdEmpresa ;
+
+            usuarioBusqueda.Nombre = (usuarioBusqueda.Nombre != null) ? usuarioBusqueda.Nombre : "";
+            usuarioBusqueda.Paterno = (usuarioBusqueda.Paterno != null) ? usuarioBusqueda.Paterno : "";
+            usuarioBusqueda.Materno = (usuarioBusqueda.Materno != null) ? usuarioBusqueda.Materno : "";
+            usuarioBusqueda.Edad = (usuarioBusqueda.Edad != 0) ? usuarioBusqueda.Edad : int.Parse("0");
+
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var resultQuery = context.UsuarioGetAllBusqueda(usuarioBusqueda.Nombre, usuarioBusqueda.Paterno, 
+                        usuarioBusqueda.Materno, usuarioBusqueda.Edad).ToList();
+
+
+                    if (resultQuery != null)
+                    {
+                        result.Objects = new List<object>();
+                        foreach (var obj in resultQuery)
+                        {
+                            ML.Usuario usuario = new ML.Usuario();
+                            usuario.IdUsuario = obj.IdUsuario;
+                            usuario.Nombre = obj.Nombre;
+                            usuario.Paterno = obj.APPaterno;
+                            usuario.Materno = obj.APMaterno;
+                            usuario.Correo = obj.Correo;
+                            usuario.Edad = obj.Edad.Value;
+
+                            result.Objects.Add(usuario);
+                            result.Correct = true;
+
+                        }
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Ocurrio un error la tabla no contiene informacion ";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.ex = ex;
+            }
+            return result;
+        }
     }
 }

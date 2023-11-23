@@ -169,5 +169,26 @@ namespace DL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("VehiculoDelete", numeroReclamoParameter);
         }
+    
+        public virtual ObjectResult<UsuarioGetAllBusqueda_Result> UsuarioGetAllBusqueda(string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<int> edad)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var edadParameter = edad.HasValue ?
+                new ObjectParameter("Edad", edad) :
+                new ObjectParameter("Edad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetAllBusqueda_Result>("UsuarioGetAllBusqueda", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, edadParameter);
+        }
     }
 }
