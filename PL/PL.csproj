@@ -293,6 +293,9 @@
     <Content Include="Views\UsuarioWCF\FormularioWCF.cshtml" />
     <Content Include="Views\Vehiculo\GetAll.cshtml" />
     <Content Include="Views\Vehiculo\CargaArchivo.cshtml" />
+    <Content Include="Views\Vehiculo\Modal.cshtml" />
+    <Content Include="Views\Vehiculo\Modal2.cshtml" />
+    <Content Include="Views\Vehiculo\Formulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

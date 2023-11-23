@@ -59,7 +59,7 @@
 
                                     <td>
                                         <a class="btn btn-warning glyphicon glyphicon-edit bi bi-pencil-square"
-                                           href="@Url.Action("Formulario", "Vehiculo", new { NumeroPoliza = vehiculo.NumeroReclamo })">
+                                           href="@Url.Action("Formulario", "Vehiculo", new { NumeroReclamo = vehiculo.NumeroReclamo })">
 
                                         </a>
                                     </td>
@@ -100,7 +100,7 @@
                                         </td>
                                     }
                                     <td>
-                                        <a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Vehiculo", new {NumeroPoliza = vehiculo.NumeroPoliza })"
+                                        <a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Vehiculo", new {NumeroReclamo = vehiculo.NumeroReclamo })"
                                            onclick="return confirm('Estas seguro de elimidar el registro?');">
 
                                         </a>

@@ -160,5 +160,14 @@ namespace DL
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VehiculoGetAll_Result>("VehiculoGetAll");
         }
+    
+        public virtual int VehiculoDelete(Nullable<int> numeroReclamo)
+        {
+            var numeroReclamoParameter = numeroReclamo.HasValue ?
+                new ObjectParameter("NumeroReclamo", numeroReclamo) :
+                new ObjectParameter("NumeroReclamo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("VehiculoDelete", numeroReclamoParameter);
+        }
     }
 }

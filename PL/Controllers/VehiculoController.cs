@@ -39,9 +39,101 @@ namespace PL.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Formulario(int? NumeroReclamo)
+        {
+            ML.Vehiculo vehiculo = new ML.Vehiculo();
+            vehiculo.Vehiculos = new List<object>();
+
+            if (NumeroReclamo > 0)
+            {
+                ML.Result result = BL.Usuairo.GetById((int)NumeroReclamo);
+
+                if (result.Correct)
+                {
+                    vehiculo = (ML.Vehiculo)result.Object;
+                }
+            }
+            else
+            {
+                return View(vehiculo);
+            }
+
+            return View(vehiculo);
+        }
+
+        [HttpPost]
+        public ActionResult Formulario(ML.Vehiculo vehiculo, HttpPostedFileBase fuimgUsuario)
+        {
+
+            if (fuimgUsuario != null)
+            {
+                vehiculo.Imagen = this.ConvertTobytes(fuimgUsuario);
+            }
+            if (vehiculo.NumeroReclamo == 0)
+            {
+                ML.Result result = BL.Vehiculo.AddEF(vehiculo);
+
+                if (result.Correct)
+                {
+                    
+                        ViewBag.Message = "Se ha ingresado correctamente el registro";
+                    
+                }
+                else
+                {
+                    ViewBag.Message = "no se ingresado correctemnte el registro , Error: " + result.ErrorMessage;
+                }
+            }
+            else
+            {
+                ML.Result result = BL.Vehiculo.AddEF(vehiculo);
+                if (result.Correct)
+                {
+                        ViewBag.Message = "Se ha actualizado correctamente el registro";
+                    
+                }
+                else
+                {
+                    ViewBag.Message = "no se actualizado correctemnte el registro , Error: " + result.ErrorMessage;
+                }
+
+            }
+            return PartialView("Modal");
+
+            //return View(usuario);
+
+        }
+
+        //Imagen
+        public byte[] ConvertTobytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
+        }
+
+        public ActionResult Delete(int NumeroReclamo)
+        {
+            ML.Result result = BL.Vehiculo.Delete(NumeroReclamo);
+
+            if (result.Correct)
+            {
+                ViewBag.Message = "Se elimino correctamente el registro";
+            }
+            else
+            {
+                ViewBag.Message = "No se elimino correctamente el registros" + NumeroReclamo + result.ErrorMessage;
+
+            }
+
+
+            return View("Modal");
+        }
 
         ////// Carga masiva de archivos
-        
+
         [HttpGet]
         public ActionResult CargaArchivo()
         {
@@ -90,7 +182,7 @@ namespace PL.Controllers
             }
             else
             {
-               
+
             }
             //}
             return View(vehiculo);
@@ -224,5 +316,7 @@ namespace PL.Controllers
                 }
             }
         }
+
+
     }
 }

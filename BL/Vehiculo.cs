@@ -67,7 +67,7 @@ namespace BL
                 {
                     var resultQuery = context.VehiculoAdd(vehiculo.FechaReclamo, vehiculo.HoraPercanse, vehiculo.TipoPercanse, 
                         vehiculo.NumeroPoliza, vehiculo.NombreConductor, vehiculo.ContactoConductor, vehiculo.DetallesVehiculo, 
-                        vehiculo.DañosPrejuicios, vehiculo.EstimacionReparacion,  vehiculo.Statu=true, vehiculo.Imagen);
+                        vehiculo.DañosPrejuicios, vehiculo.EstimacionReparacion, vehiculo.Statu=true, vehiculo.Imagen);
 
                     if (resultQuery > 0)
                     {
@@ -89,6 +89,38 @@ namespace BL
 
             return result;
 
+        }
+
+        public static ML.Result Delete(int Id)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var query = context.VehiculoDelete(Id);
+
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se elimino el regitro";
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = e.Message;
+                result.ex = e;
+            }
+
+            return result;
         }
     }
 }

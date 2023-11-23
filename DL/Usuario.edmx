@@ -68,6 +68,9 @@
           <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
         </Function>
+        <Function Name="VehiculoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroReclamo" Type="int" Mode="In" />
+        </Function>
         <Function Name="VehiculoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="OTorresCRUDModelStoreContainer">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
@@ -127,6 +130,9 @@
             <Parameter Name="Imagen" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="VehiculoGetAll" ReturnType="Collection(OTorresCRUDModel.VehiculoGetAll_Result)" />
+          <FunctionImport Name="VehiculoDelete">
+            <Parameter Name="NumeroReclamo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="UsuarioGetAll_Result">
           <Property Type="Int32" Name="IdUsuario" Nullable="false" />
@@ -257,6 +263,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VehiculoDelete" FunctionName="OTorresCRUDModel.Store.VehiculoDelete" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

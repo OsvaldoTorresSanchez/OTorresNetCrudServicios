@@ -64,9 +64,6 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-
-                                <th>Editar</th>
-                                <th class="d-none d-md-table-cell">Numero reclamo</th>
                                 <th class="d-none d-md-table-cell">Fecha Reclamo</th>
                                 <th class="d-none d-md-table-cell">Hora Percanse</th>
                                 <th class="d-none d-md-table-cell">Tipo Percanse </th>
@@ -78,7 +75,6 @@
                                 <th class="d-none d-md-table-cell">Estimacion Reparacion</th>
                                 <th class="d-none d-md-table-cell">Statu</th>
                                 <th class="d-none d-md-table-cell">Imagen</th>
-                                <th>Eliminar</th>
                             </tr>
 
                         </thead>
@@ -88,13 +84,6 @@
                             {
                                 <tr>
 
-                                    <td>
-                                        <a class="btn btn-warning glyphicon glyphicon-edit bi bi-pencil-square"
-                                           href="@Url.Action("Formulario", "Vehiculo", new { NumeroPoliza = vehiculo.NumeroReclamo })">
-
-                                        </a>
-                                    </td>
-                                    <td>@vehiculo.NumeroReclamo</td>
                                     <td>@vehiculo.FechaReclamo</td>
                                     <td>@vehiculo.HoraPercanse</td>
                                     <td>@vehiculo.TipoPercanse</td>
@@ -130,12 +119,7 @@
                                             <img src="~/Img/userl.jpg" alt="@vehiculo.NumeroPoliza" style="width: 125px; height: 100px;" />
                                         </td>
                                     }
-                                    <td>
-                                        <a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Vehiculo", new {NumeroPoliza = vehiculo.NumeroPoliza })"
-                                           onclick="return confirm('Estas seguro de elimidar el registro?');">
-
-                                        </a>
-                                    </td>
+                                   
                                 </tr>
 
 

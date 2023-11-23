@@ -1,0 +1,135 @@
+﻿@model ML.Vehiculo
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class=" container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Usuario</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Ingrese los datos del usuario</h5>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Formulario", "Vehiculo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.NumeroReclamo, new { @class = "visually-hidden-focusable" })
+                @Html.TextBoxFor(model => model.NumeroReclamo, new { @class = "form-control visually-hidden-focusable", @id = "txtIdUsuario" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.FechaReclamo)
+                @Html.TextBoxFor(model => model.FechaReclamo, new { @class = "form-control", placeholder = " Username", @id = "txtUserName" })
+              
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.HoraPercanse)
+                @Html.TextBoxFor(model => model.HoraPercanse, new { @class = "form-control", placeholder = " Nombre", @id = "txtNombre" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.TipoPercanse)
+                @Html.TextBoxFor(model => model.TipoPercanse, new { @class = "form-control", placeholder = " ApellidoPaterno",  @id = "txtApellidoPaterno" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.NumeroPoliza)
+                @Html.TextBoxFor(model => model.NumeroPoliza, new { @class = "form-control", placeholder = " ApellidoMaterno", @id = "txtApellidoMaterno" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.NombreConductor)
+                @Html.TextBoxFor(model => model.NombreConductor, new { @class = "form-control", placeholder = " Email", @id = "txtCorreo" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.ContactoConductor)
+                @Html.TextBoxFor(model => model.ContactoConductor, new { @class = "form-control", placeholder = " Confirma tu correo de nuevo", @id = "txtCorreo2" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.DetallesVehiculo)
+                @Html.TextBoxFor(model => model.DetallesVehiculo, new { @class = "form-control", placeholder = " Password", @id = "txtContrasena" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.DañosPrejuicios)
+                @Html.TextBoxFor(model => model.DañosPrejuicios, new { @class = "form-control", placeholder = " Password",  @id = "txtContrasena2" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.EstimacionReparacion)
+                @Html.TextBoxFor(model => model.EstimacionReparacion, new { @class = "form-control", placeholder = " Sexo", @id = "txtSexo" })
+            </div>
+        </div>
+
+        //imagen
+        <div class="row">
+            <div class="col-md-12">
+                @*@Html.LabelFor(model => model.Imagen)*@
+                @Html.HiddenFor(model => model.Imagen)
+                <br />
+                <input type="file" id="fuimgUsuario" name="fuimgUsuario" onchange="PreviewImage(event)" />
+                <br />
+                @if (Model.Imagen == null)
+                {
+                    <img id="imgUsuario" src="~/Img/userl.jpg" style="width:250px; height:200px;" />
+                }
+                else
+                {
+                    <img id="imgUsuario" src="data:img/userl.jpg;base64,@Convert.ToBase64String(Model.Imagen)" style="width:250px; height:200px;" />
+                }
+            </div>
+        </div>
+
+        //Statu
+
+
+        <br />
+        <div class="row">
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-success"> Guardar</button>
+            </div>
+            <div class="col-md-1">
+                @Html.ActionLink("Cancelar", "GetAll", "Usuario", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    }
+</div>
+
+@*IMAGEN*@
+<script type="text/javascript">
+    function PreviewImage(event) {
+        var output = document.getElementById("imgUsuario");
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src);
+        }
+    };
+
+</script>
