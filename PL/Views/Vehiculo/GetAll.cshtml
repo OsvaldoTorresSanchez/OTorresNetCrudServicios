@@ -77,12 +77,12 @@
                                         <label class="switch">
                                             @if (vehiculo.Statu)
                                             {
-                                                <input class="chkStatu" value="@vehiculo.NumeroPoliza" type="checkbox" checked>
+                                                <input class="chkStatu" value="@vehiculo.NumeroReclamo" type="checkbox" checked>
                                                 <span class="slider round"></span>
                                             }
                                             else
                                             {
-                                                <input class="chkStatu" value="@vehiculo.NumeroPoliza" type="checkbox">
+                                                <input class="chkStatu" value="@vehiculo.NumeroReclamo" type="checkbox">
                                                 <span class="slider round"></span>
                                             }
                                         </label>
@@ -119,8 +119,31 @@
 
         </div>
     }
-
-
 </div>
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".chkStatu").click(function ()
+        {
+          var chk = $(this)[0].checked;
+            var numeroReclamo = $(this)[0].value;
+            $.ajax
+            ({
+                type: 'POST',
+                url: '@Url.Action("UpdateStatu")',
+                datatype: 'json',
+                data: { NumeroReclamo: numeroReclamo, Statu: chk },
+                success: function(result)
+                {
+                    alert('El statu se actualizo correctamente ')
+                },
+                error: function (ex)
+                {
+                    alert('Failed ' + ex);
+                }
+            });
+        });
+    });
+</script>
 

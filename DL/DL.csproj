@@ -84,6 +84,9 @@
     <Compile Include="VehiculoGetAll_Result.cs">
       <DependentUpon>Usuario.tt</DependentUpon>
     </Compile>
+    <Compile Include="VehiculoGetById_Result.cs">
+      <DependentUpon>Usuario.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Usuario.edmx">

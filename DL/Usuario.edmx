@@ -78,6 +78,27 @@
           <Parameter Name="NumeroReclamo" Type="int" Mode="In" />
         </Function>
         <Function Name="VehiculoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VehiculoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroReclamo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="VehiculoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroReclamo" Type="int" Mode="In" />
+          <Parameter Name="FechaReclamo" Type="varchar" Mode="In" />
+          <Parameter Name="HoraPercanse" Type="int" Mode="In" />
+          <Parameter Name="TipoPercanse" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroPoliza" Type="int" Mode="In" />
+          <Parameter Name="NombreConductor" Type="varchar" Mode="In" />
+          <Parameter Name="ContactoConductor" Type="int" Mode="In" />
+          <Parameter Name="DetallesVehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="DañosPrejuicios" Type="varchar" Mode="In" />
+          <Parameter Name="EstimacionReparacion" Type="decimal" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="VehiculoUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroReclamo" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="OTorresCRUDModelStoreContainer">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
@@ -113,14 +134,6 @@
           <FunctionImport Name="UsuarioGetById" ReturnType="Collection(OTorresCRUDModel.UsuarioGetById_Result)">
           <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UsuarioUpdate">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="APPATERNO" Mode="In" Type="String" />
-            <Parameter Name="APMATERNO" Mode="In" Type="String" />
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Edad" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="Vehiculoes" EntityType="OTorresCRUDModel.Vehiculo" />
           <FunctionImport Name="VehiculoAdd">
             <Parameter Name="FechaReclamo" Mode="In" Type="String" />
@@ -143,6 +156,35 @@
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Edad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="VehiculoGetById" ReturnType="Collection(OTorresCRUDModel.VehiculoGetById_Result)">
+          <Parameter Name="NumeroReclamo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="VehiculoUpdateStatus">
+            <Parameter Name="NumeroReclamo" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="VehiculoUpdate">
+            <Parameter Name="NumeroReclamo" Mode="In" Type="Int32" />
+            <Parameter Name="FechaReclamo" Mode="In" Type="String" />
+            <Parameter Name="HoraPercanse" Mode="In" Type="Int32" />
+            <Parameter Name="TipoPercanse" Mode="In" Type="String" />
+            <Parameter Name="NumeroPoliza" Mode="In" Type="Int32" />
+            <Parameter Name="NombreConductor" Mode="In" Type="String" />
+            <Parameter Name="ContactoConductor" Mode="In" Type="Int32" />
+            <Parameter Name="DetallesVehiculo" Mode="In" Type="String" />
+            <Parameter Name="DañosPrejuicios" Mode="In" Type="String" />
+            <Parameter Name="EstimacionReparacion" Mode="In" Type="Decimal" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioUpdate">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="APPATERNO" Mode="In" Type="String" />
+            <Parameter Name="APMATERNO" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Edad" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -201,6 +243,20 @@
           <Property Type="String" Name="Correo" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Edad" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="VehiculoGetById_Result">
+          <Property Type="Int32" Name="NumeroReclamo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaReclamo" Nullable="true" />
+          <Property Type="Int32" Name="HoraPercanse" Nullable="true" />
+          <Property Type="String" Name="TipoPercanse" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NumeroPoliza" Nullable="true" />
+          <Property Type="String" Name="NombreConductor" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ContactoConductor" Nullable="true" />
+          <Property Type="String" Name="DetallesVehiculo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DañosPrejuicios" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="EstimacionReparacion" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -245,7 +301,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UsuarioUpdate" FunctionName="OTorresCRUDModel.Store.UsuarioUpdate" />
           <EntitySetMapping Name="Vehiculoes">
             <EntityTypeMapping TypeName="OTorresCRUDModel.Vehiculo">
               <MappingFragment StoreEntitySet="Vehiculo">
@@ -296,6 +351,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VehiculoGetById" FunctionName="OTorresCRUDModel.Store.VehiculoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OTorresCRUDModel.VehiculoGetById_Result">
+                <ScalarProperty Name="NumeroReclamo" ColumnName="NumeroReclamo" />
+                <ScalarProperty Name="FechaReclamo" ColumnName="FechaReclamo" />
+                <ScalarProperty Name="HoraPercanse" ColumnName="HoraPercanse" />
+                <ScalarProperty Name="TipoPercanse" ColumnName="TipoPercanse" />
+                <ScalarProperty Name="NumeroPoliza" ColumnName="NumeroPoliza" />
+                <ScalarProperty Name="NombreConductor" ColumnName="NombreConductor" />
+                <ScalarProperty Name="ContactoConductor" ColumnName="ContactoConductor" />
+                <ScalarProperty Name="DetallesVehiculo" ColumnName="DetallesVehiculo" />
+                <ScalarProperty Name="DañosPrejuicios" ColumnName="DañosPrejuicios" />
+                <ScalarProperty Name="EstimacionReparacion" ColumnName="EstimacionReparacion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VehiculoUpdateStatus" FunctionName="OTorresCRUDModel.Store.VehiculoUpdateStatus" />
+          <FunctionImportMapping FunctionImportName="VehiculoUpdate" FunctionName="OTorresCRUDModel.Store.VehiculoUpdate" />
+          <FunctionImportMapping FunctionImportName="UsuarioUpdate" FunctionName="OTorresCRUDModel.Store.UsuarioUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

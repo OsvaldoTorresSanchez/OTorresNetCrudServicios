@@ -42,12 +42,13 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult Formulario(int? NumeroReclamo)
         {
+
             ML.Vehiculo vehiculo = new ML.Vehiculo();
             vehiculo.Vehiculos = new List<object>();
 
             if (NumeroReclamo > 0)
             {
-                ML.Result result = BL.Usuairo.GetById((int)NumeroReclamo);
+                ML.Result result = BL.Vehiculo.GetById((int)NumeroReclamo);
 
                 if (result.Correct)
                 {
@@ -65,44 +66,49 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult Formulario(ML.Vehiculo vehiculo, HttpPostedFileBase fuimgUsuario)
         {
-
-            if (fuimgUsuario != null)
+            if (ModelState.IsValid)//Validaaciones
             {
-                vehiculo.Imagen = this.ConvertTobytes(fuimgUsuario);
-            }
-            if (vehiculo.NumeroReclamo == 0)
-            {
-                ML.Result result = BL.Vehiculo.AddEF(vehiculo);
-
-                if (result.Correct)
+                if (fuimgUsuario != null)
                 {
-                    
+                    vehiculo.Imagen = this.ConvertTobytes(fuimgUsuario);
+                }
+                if (vehiculo.NumeroReclamo == 0)
+                {
+                    ML.Result result = BL.Vehiculo.AddEF(vehiculo);
+
+                    if (result.Correct)
+                    {
+
                         ViewBag.Message = "Se ha ingresado correctamente el registro";
-                    
+
+                    }
+                    else
+                    {
+                        ViewBag.Message = "no se ingresado correctemnte el registro , Error: " + result.ErrorMessage;
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = "no se ingresado correctemnte el registro , Error: " + result.ErrorMessage;
+                    ML.Result result = BL.Vehiculo.UpdateEF(vehiculo);
+                    if (result.Correct)
+                    {
+                        ViewBag.Message = "Se ha actualizado correctamente el registro";
+
+                    }
+                    else
+                    {
+                        ViewBag.Message = "no se actualizado correctemnte el registro , Error: " + result.ErrorMessage;
+                    }
+
                 }
+                return PartialView("Modal");
+
+                //return View(usuario);
             }
             else
             {
-                ML.Result result = BL.Vehiculo.AddEF(vehiculo);
-                if (result.Correct)
-                {
-                        ViewBag.Message = "Se ha actualizado correctamente el registro";
-                    
-                }
-                else
-                {
-                    ViewBag.Message = "no se actualizado correctemnte el registro , Error: " + result.ErrorMessage;
-                }
-
+                return View(vehiculo);
             }
-            return PartialView("Modal");
-
-            //return View(usuario);
-
         }
 
         //Imagen
@@ -130,6 +136,31 @@ namespace PL.Controllers
 
 
             return View("Modal");
+        }
+
+        /////// Toggle
+        public JsonResult UpdateStatu(int NumeroReclamo, bool Statu)
+        {
+            ML.Vehiculo vehiculo = new ML.Vehiculo();
+            ML.Result result = BL.Vehiculo.GetById(NumeroReclamo);
+
+            if (result.Correct)
+            {
+                vehiculo = ((ML.Vehiculo)result.Object);
+                vehiculo.Statu = (vehiculo.Statu) ? false : true;
+
+                ML.Result resultUpdateStatu = BL.Vehiculo.UpdateEF(vehiculo);
+
+                ViewBag.Message = "Se actualizo el statu del usuario";
+
+            }
+            else
+            {
+                ViewBag.Message = "No se actualizo el statu del usuario";
+
+
+            }
+            return Json(result.Objects);
         }
 
         ////// Carga masiva de archivos

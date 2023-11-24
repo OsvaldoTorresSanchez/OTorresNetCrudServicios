@@ -29,8 +29,8 @@
         <div class="row">
             <div class="col-md-12">
                 @Html.LabelFor(model => model.FechaReclamo)
-                @Html.TextBoxFor(model => model.FechaReclamo, new { @class = "form-control", placeholder = " Username", @id = "txtUserName" })
-              
+                @Html.TextBoxFor(model => model.FechaReclamo, "{0:yyyy-MM-dd}", new { @class = "form-control", placeholder = "Fecha de Reclamo", @id = "txtFechaReclamo", @type = "date" })
+
             </div>
         </div>
 
@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-12">
                 @Html.LabelFor(model => model.TipoPercanse)
-                @Html.TextBoxFor(model => model.TipoPercanse, new { @class = "form-control", placeholder = " ApellidoPaterno",  @id = "txtApellidoPaterno" })
+                @Html.TextBoxFor(model => model.TipoPercanse, new { @class = "form-control", placeholder = " ApellidoPaterno", @id = "txtApellidoPaterno" })
             </div>
         </div>
 
@@ -52,6 +52,7 @@
             <div class="col-md-12">
                 @Html.LabelFor(model => model.NumeroPoliza)
                 @Html.TextBoxFor(model => model.NumeroPoliza, new { @class = "form-control", placeholder = " ApellidoMaterno", @id = "txtApellidoMaterno" })
+                @Html.ValidationMessageFor(model => model.NumeroPoliza, null, new { @class = "text-danger", @id = "lblNombreEmpleado" })
             </div>
         </div>
 
@@ -77,7 +78,7 @@
         <div class="row">
             <div class="col-md-12">
                 @Html.LabelFor(model => model.DañosPrejuicios)
-                @Html.TextBoxFor(model => model.DañosPrejuicios, new { @class = "form-control", placeholder = " Password",  @id = "txtContrasena2" })
+                @Html.TextBoxFor(model => model.DañosPrejuicios, new { @class = "form-control", placeholder = " Password", @id = "txtContrasena2" })
             </div>
         </div>
 

@@ -58,6 +58,56 @@ namespace BL
             return result;
         }
 
+        public static ML.Result GetById(int id)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var query = context.VehiculoGetById(id).FirstOrDefault();
+
+                    result.Objects = new List<object>();
+
+                    if (query != null)
+                    {
+                        ML.Vehiculo vehiculo = new ML.Vehiculo();
+                        vehiculo.NumeroReclamo = query.NumeroReclamo;
+                        vehiculo.FechaReclamo = query.FechaReclamo.Value.ToString("dd-MM-yyyy");
+                        vehiculo.HoraPercanse = query.HoraPercanse.Value;
+                        vehiculo.TipoPercanse = query.TipoPercanse;
+                        vehiculo.NumeroPoliza = query.NumeroPoliza.Value;
+                        vehiculo.NombreConductor = query.NombreConductor;
+                        vehiculo.ContactoConductor = query.ContactoConductor.Value;
+                        vehiculo.DetallesVehiculo = query.DetallesVehiculo;
+                        vehiculo.DañosPrejuicios = query.DañosPrejuicios;
+                        vehiculo.EstimacionReparacion = query.EstimacionReparacion.Value;
+                        vehiculo.Imagen = query.Imagen;
+                        vehiculo.Statu = query.Estatus.Value ? true : false;
+
+                        result.Object = vehiculo;
+                        result.Correct = true;
+
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Ocurrio un problema, la tabla no contiene información";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = true;
+                result.ErrorMessage = ex.Message;
+                result.ex = ex;
+
+            }
+            return result;
+        }
+
         public static ML.Result AddEF(ML.Vehiculo vehiculo)
         {
             ML.Result result = new ML.Result();
@@ -68,6 +118,40 @@ namespace BL
                     var resultQuery = context.VehiculoAdd(vehiculo.FechaReclamo, vehiculo.HoraPercanse, vehiculo.TipoPercanse, 
                         vehiculo.NumeroPoliza, vehiculo.NombreConductor, vehiculo.ContactoConductor, vehiculo.DetallesVehiculo, 
                         vehiculo.DañosPrejuicios, vehiculo.EstimacionReparacion, vehiculo.Statu=true, vehiculo.Imagen);
+
+                    if (resultQuery > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se puede añadir el registro " + vehiculo.NumeroReclamo;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.ErrorMessage = ex.InnerException.Message;//Error mas detallado 
+                result.ex = ex;
+            }
+
+            return result;
+
+        }
+
+        public static ML.Result UpdateEF(ML.Vehiculo vehiculo)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var resultQuery = context.VehiculoUpdate(vehiculo.NumeroReclamo, vehiculo.FechaReclamo, vehiculo.HoraPercanse, vehiculo.TipoPercanse,
+                        vehiculo.NumeroPoliza, vehiculo.NombreConductor, vehiculo.ContactoConductor, vehiculo.DetallesVehiculo,
+                        vehiculo.DañosPrejuicios, vehiculo.EstimacionReparacion, vehiculo.Statu, vehiculo.Imagen);
 
                     if (resultQuery > 0)
                     {
