@@ -149,9 +149,42 @@ namespace BL
             {
                 using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
                 {
-                    var resultQuery = context.VehiculoUpdate(vehiculo.NumeroReclamo, vehiculo.FechaReclamo, vehiculo.HoraPercanse, vehiculo.TipoPercanse,
-                        vehiculo.NumeroPoliza, vehiculo.NombreConductor, vehiculo.ContactoConductor, vehiculo.DetallesVehiculo,
-                        vehiculo.DañosPrejuicios, vehiculo.EstimacionReparacion, vehiculo.Statu, vehiculo.Imagen);
+                    var resultQuery = context.VehiculoUpdate(vehiculo.NumeroReclamo, vehiculo.FechaReclamo, vehiculo.HoraPercanse,
+                        vehiculo.TipoPercanse, vehiculo.NumeroPoliza, vehiculo.NombreConductor, vehiculo.ContactoConductor, 
+                        vehiculo.DetallesVehiculo, vehiculo.DañosPrejuicios, vehiculo.EstimacionReparacion, vehiculo.Statu, 
+                        vehiculo.Imagen);
+
+                    if (resultQuery > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se puede añadir el registro " + vehiculo.NumeroReclamo;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.ErrorMessage = ex.InnerException.Message;//Error mas detallado 
+                result.ex = ex;
+            }
+
+            return result;
+
+        }
+
+        public static ML.Result UpdateEstatus(ML.Vehiculo vehiculo)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.OTorresCRUDEntities context = new DL.OTorresCRUDEntities())
+                {
+                    var resultQuery = context.VehiculoUpdateStatus(vehiculo.NumeroReclamo, vehiculo.Statu);
 
                     if (resultQuery > 0)
                     {

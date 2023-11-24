@@ -149,7 +149,7 @@ namespace PL.Controllers
                 vehiculo = ((ML.Vehiculo)result.Object);
                 vehiculo.Statu = (vehiculo.Statu) ? false : true;
 
-                ML.Result resultUpdateStatu = BL.Vehiculo.UpdateEF(vehiculo);
+                ML.Result resultUpdateStatu = BL.Vehiculo.UpdateEstatus(vehiculo);
 
                 ViewBag.Message = "Se actualizo el statu del usuario";
 
